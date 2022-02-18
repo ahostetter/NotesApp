@@ -2,18 +2,19 @@ namespace NotesApp;
 
 public partial class HelloXamlPage : ContentPage
 {
-	int count = 0;
-
 	public HelloXamlPage()
 	{
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
 	{
-		count++;
-		CounterLabel.Text = $"Current count: {count}";
+		valueLabel.Text = args.NewValue.ToString("F3");
+	}
 
-		SemanticScreenReader.Announce(CounterLabel.Text);
+	async void OnButtonClicked(object sender, EventArgs args)
+	{
+		Button button = (Button)sender;
+		await DisplayAlert("Clicked!", "The button labeled '" + button.Text + "' has been clicked", "OK");
 	}
 }
